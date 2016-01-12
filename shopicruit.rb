@@ -10,12 +10,14 @@ KnapsackItem = Struct.new(:name, :weight, :value)
 product_list = Array.new
 json['products'].each do |product|
 	if(product['product_type'] == 'Keyboard' || product['product_type'] == 'Computer')
-		lighest_product = product['variants'].sort_by {|key| key['grams']}
-		product_list.push(KnapsackItem.new(product['title'], lighest_product[0]['grams'], lighest_product[0]['price'].to_f  ))
+
+    product['variants'].each do |variant|
+      product_list.push(KnapsackItem.new(product['title'], variant['grams'], variant['price'].to_f  ))
+    end
 	end
 end
 
- #from http://rosettacode.org/wiki/Knapsack_problem/0-1#Dynamic_Programming
+#from http://rosettacode.org/wiki/Knapsack_problem/0-1#Dynamic_Programming
 def dynamic_programming_knapsack(items, max_weight)
   num_items = items.size
   cost_matrix = Array.new(num_items){Array.new(max_weight+1, 0)}
