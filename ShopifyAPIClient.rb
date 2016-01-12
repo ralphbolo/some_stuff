@@ -6,7 +6,10 @@ class ShopifyAPIClient
   # def set_shop_id(shop_Id)
   #   @shop_id = shop_Id
   # end
+  
+  #1
   attr_accessor :shop_id
+  #2
   SECRET_API_KEY = ENV['api_key']
  
   def orders
@@ -26,7 +29,8 @@ class ShopifyAPIClient
     product_json = some_http_library.get("https://www.shopify.this.is.a.sample.com/#{shop_id}/products/#{id}", params)
     return JSON.parse(product_json)
   end
-
+  
+  #3
   def authenticate
     params = Hash.new
     params[:basic_auth] = {username: SECRET_API_KEY, password: ''} #username could also be wrong, im not sure
